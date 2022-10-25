@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      background: #000;
+      transition-duration: 3s;
+      overflow: hidden;
+    }
+    .flex {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      flex-direction: column;
+    }
+
+    .jam {
+      color: white;
+      transition-duration: 3s;
+    }
+    .gabut {
+      font-size: 5rem;
+      margin-bottom: 0;
+    }
+  </style>
+  <body>
+    <div class="flex">
+      <div>
+        <h1 id="gabut" class="gabut"></h1>
+      </div>
+      <div>
+        <h1 id="time" class="jam"></h1>
+      </div>
+    </div>
+
+    <script>
+      function addZero(i) {
+        if (i < 10) {
+          i = "0" + i;
+        }
+        return i;
+      }
+
+      let menit = 0;
+
+      const callGabut = () => {
+        let a = "gabut_bro?_udah_semenit_lo_ini_!";
+        const _gabut = [...a];
+        let _i = 0;
+        const intervals = setInterval(() => {
+          document.getElementById("gabut").innerHTML += _gabut[_i];
+          _i = _i + 1;
+          if (_i == _gabut.length) {
+            clearInterval(intervals);
+          }
+        }, 300);
+      };
+
+      const gabut = (params) => {
+        if (params === 5) {
+          document.querySelector("body").style.background = "#fff";
+          document.querySelector("#time").style.color = "#000";
+          callGabut();
+        }
+      };
+      const timer = setInterval(() => {
+        const d = new Date();
+        let h = addZero(d.getHours());
+        let m = addZero(d.getMinutes());
+        let s = addZero(d.getSeconds());
+        let time = h + ":" + m + ":" + s;
+        menit = menit + 1;
+        gabut(menit);
+        document.getElementById("time").innerHTML = time;
+      }, 1000);
+    </script>
+  </body>
+</html>
